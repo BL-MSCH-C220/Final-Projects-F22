@@ -1,0 +1,398 @@
+[gd_scene load_steps=30 format=2]
+
+[ext_resource path="res://Player/Player.gd" type="Script" id=1]
+[ext_resource path="res://Assets/player/spritesheet-2.png" type="Texture" id=2]
+[ext_resource path="res://Player/Pause_Menu.gd" type="Script" id=3]
+[ext_resource path="res://Assets/accelerator.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://Assets/playersheet.png" type="Texture" id=5]
+
+[sub_resource type="AtlasTexture" id=26]
+flags = 4
+atlas = ExtResource( 5 )
+region = Rect2( 64, 192, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=27]
+flags = 4
+atlas = ExtResource( 5 )
+region = Rect2( 128, 192, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=28]
+flags = 4
+atlas = ExtResource( 5 )
+region = Rect2( 192, 192, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=29]
+flags = 4
+atlas = ExtResource( 5 )
+region = Rect2( 256, 192, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=30]
+flags = 4
+atlas = ExtResource( 5 )
+region = Rect2( 0, 256, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=31]
+flags = 4
+atlas = ExtResource( 5 )
+region = Rect2( 64, 256, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=32]
+flags = 4
+atlas = ExtResource( 5 )
+region = Rect2( 128, 256, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=33]
+flags = 4
+atlas = ExtResource( 5 )
+region = Rect2( 256, 64, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=34]
+flags = 4
+atlas = ExtResource( 5 )
+region = Rect2( 0, 128, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=13]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 512, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=14]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 576, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=15]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 640, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=16]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 704, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=35]
+flags = 4
+atlas = ExtResource( 5 )
+region = Rect2( 128, 64, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=36]
+flags = 4
+atlas = ExtResource( 5 )
+region = Rect2( 192, 64, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=1]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 384, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=2]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 448, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=37]
+flags = 4
+atlas = ExtResource( 5 )
+region = Rect2( 64, 64, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=38]
+flags = 4
+atlas = ExtResource( 5 )
+region = Rect2( 128, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=39]
+flags = 4
+atlas = ExtResource( 5 )
+region = Rect2( 192, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=40]
+flags = 4
+atlas = ExtResource( 5 )
+region = Rect2( 256, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=41]
+flags = 4
+atlas = ExtResource( 5 )
+region = Rect2( 0, 64, 64, 64 )
+
+[sub_resource type="SpriteFrames" id=3]
+animations = [ {
+"frames": [ SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ), SubResource( 30 ), SubResource( 31 ), SubResource( 32 ) ],
+"loop": true,
+"name": "attack",
+"speed": 7.0
+}, {
+"frames": [ SubResource( 33 ), SubResource( 34 ) ],
+"loop": true,
+"name": "fall",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ) ],
+"loop": true,
+"name": "fall_attack",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 35 ), SubResource( 36 ) ],
+"loop": true,
+"name": "falling",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 1 ), SubResource( 2 ) ],
+"loop": true,
+"name": "idle",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 37 ) ],
+"loop": true,
+"name": "jump",
+"speed": 10.0
+}, {
+"frames": [ SubResource( 38 ), SubResource( 39 ), SubResource( 40 ), SubResource( 41 ) ],
+"loop": true,
+"name": "running",
+"speed": 10.0
+} ]
+
+[sub_resource type="DynamicFont" id=25]
+size = 66
+font_data = ExtResource( 4 )
+
+[node name="Player" type="KinematicBody2D"]
+collision_layer = 2570
+collision_mask = 2569
+script = ExtResource( 1 )
+
+[node name="Sprite" type="AnimatedSprite" parent="."]
+position = Vector2( 0, -1 )
+scale = Vector2( 2, 2 )
+frames = SubResource( 3 )
+animation = "fall"
+frame = 1
+playing = true
+
+[node name="Player" type="Area2D" parent="."]
+collision_layer = 512
+collision_mask = 512
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Player"]
+position = Vector2( 8, 4.76837e-07 )
+scale = Vector2( 1.11111, 2.01562 )
+polygon = PoolVector2Array( -28.8, 27.783, -28.8, -27.783, 14.4, -27.783, 14.4, 27.783 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2( 8, 0 )
+scale = Vector2( 1.11111, 2.01562 )
+polygon = PoolVector2Array( -28.8, 27.783, -28.8, -27.783, 14.4, -27.783, 14.4, 27.783 )
+
+[node name="Floor" type="Node2D" parent="."]
+position = Vector2( -416, -380 )
+
+[node name="Left" type="RayCast2D" parent="Floor"]
+position = Vector2( 392, 408 )
+scale = Vector2( 3, 0.850874 )
+enabled = true
+cast_to = Vector2( 0, 56.4126 )
+
+[node name="Right" type="RayCast2D" parent="Floor"]
+position = Vector2( 439, 408 )
+scale = Vector2( 3, 0.847585 )
+enabled = true
+cast_to = Vector2( 0, 56.6315 )
+
+[node name="Center" type="RayCast2D" parent="Floor"]
+position = Vector2( 416, 408 )
+scale = Vector2( 3, 1.15104 )
+enabled = true
+cast_to = Vector2( 0, 41.7014 )
+
+[node name="Celling" type="Node2D" parent="."]
+position = Vector2( -416, -380 )
+
+[node name="Left" type="RayCast2D" parent="Celling"]
+position = Vector2( 392, 358 )
+rotation = 3.14159
+scale = Vector2( 3, 1 )
+enabled = true
+cast_to = Vector2( 0, 46 )
+
+[node name="Right" type="RayCast2D" parent="Celling"]
+position = Vector2( 440, 358 )
+rotation = 3.14159
+scale = Vector2( 3, 1 )
+enabled = true
+cast_to = Vector2( 0, 46 )
+
+[node name="Center" type="RayCast2D" parent="Celling"]
+position = Vector2( 416, 358 )
+rotation = 3.14159
+scale = Vector2( 3, 1 )
+enabled = true
+cast_to = Vector2( 0, 46 )
+
+[node name="Wall" type="Node2D" parent="."]
+position = Vector2( -200, -148 )
+
+[node name="Left" type="Node2D" parent="Wall"]
+
+[node name="Top" type="RayCast2D" parent="Wall/Left"]
+position = Vector2( 184, 117 )
+scale = Vector2( 1, 10 )
+enabled = true
+cast_to = Vector2( -25, 0 )
+
+[node name="Center" type="RayCast2D" parent="Wall/Left"]
+position = Vector2( 184, 152 )
+scale = Vector2( 1, 10 )
+enabled = true
+cast_to = Vector2( -26, 0 )
+
+[node name="Bottom" type="RayCast2D" parent="Wall/Left"]
+position = Vector2( 184, 187 )
+scale = Vector2( 1, 10 )
+enabled = true
+cast_to = Vector2( -26, 0 )
+
+[node name="Right" type="Node2D" parent="Wall"]
+position = Vector2( 400, 296 )
+rotation = 3.14159
+
+[node name="Top" type="RayCast2D" parent="Wall/Right"]
+position = Vector2( 184, 109 )
+scale = Vector2( 1, 10 )
+enabled = true
+cast_to = Vector2( -25.0003, 4.19617e-05 )
+
+[node name="Center" type="RayCast2D" parent="Wall/Right"]
+position = Vector2( 184, 152 )
+scale = Vector2( 1, 10 )
+enabled = true
+cast_to = Vector2( -25.0004, 4.19617e-05 )
+
+[node name="Bottom" type="RayCast2D" parent="Wall/Right"]
+position = Vector2( 184, 179 )
+scale = Vector2( 1, 10 )
+enabled = true
+cast_to = Vector2( -24.0005, 0.100041 )
+
+[node name="AttackRight" type="Area2D" parent="."]
+position = Vector2( -416, -380 )
+collision_layer = 513
+collision_mask = 513
+monitoring = false
+monitorable = false
+
+[node name="Poly" type="CollisionPolygon2D" parent="AttackRight"]
+position = Vector2( 125.444, 60 )
+scale = Vector2( 0.694444, 0.833333 )
+build_mode = 1
+polygon = PoolVector2Array( 448, 304, 496, 300, 512, 348, 512, 428, 488, 468, 440, 464, 472, 392, 472, 336 )
+disabled = true
+
+[node name="AttackLeft" type="Area2D" parent="."]
+position = Vector2( -416, -380 )
+rotation = 3.14159
+collision_layer = 513
+collision_mask = 513
+monitoring = false
+monitorable = false
+
+[node name="Poly" type="CollisionPolygon2D" parent="AttackLeft"]
+position = Vector2( -703.998, -700.002 )
+rotation = -6.28319
+scale = Vector2( 0.694444, 0.833333 )
+build_mode = 1
+polygon = PoolVector2Array( 448, 304, 496, 300, 512, 348, 512, 428, 488, 468, 440, 464, 472, 392, 472, 336 )
+disabled = true
+
+[node name="AttackTimer1" type="Timer" parent="."]
+one_shot = true
+
+[node name="AttackCool" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
+[node name="AttackInt" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
+
+[node name="ArrowTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="JumpTimer" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+zoom = Vector2( 2, 2 )
+
+[node name="Label" type="Label" parent="Camera2D"]
+margin_left = -1004.0
+margin_top = -590.0
+margin_right = -765.0
+margin_bottom = -576.0
+custom_fonts/font = SubResource( 25 )
+text = "Deaths:"
+
+[node name="Pause_Menu" type="Control" parent="."]
+pause_mode = 2
+visible = false
+margin_left = -1024.0
+margin_top = -592.0
+margin_right = 1019.0
+margin_bottom = 604.0
+script = ExtResource( 3 )
+
+[node name="ColorRect" type="ColorRect" parent="Pause_Menu"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.254902, 0.254902, 0.254902, 0.54902 )
+
+[node name="Label" type="Label" parent="Pause_Menu"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -121.5
+margin_top = -151.0
+margin_right = 123.5
+margin_bottom = -67.0
+text = "Paused
+"
+align = 1
+valign = 1
+clip_text = true
+
+[node name="Continue" type="Button" parent="Pause_Menu"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -121.0
+margin_top = -36.5
+margin_right = 121.0
+margin_bottom = 36.5
+text = "Continue"
+
+[node name="Quit" type="Button" parent="Pause_Menu"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -121.0
+margin_top = 59.5
+margin_right = 121.0
+margin_bottom = 132.5
+text = "Quit"
+
+[connection signal="body_entered" from="AttackRight" to="." method="_on_AttackRight_body_entered"]
+[connection signal="body_entered" from="AttackLeft" to="." method="_on_AttackLeft_body_entered"]
+[connection signal="timeout" from="AttackTimer1" to="." method="_on_AttackTimer1_timeout"]
+[connection signal="timeout" from="AttackCool" to="." method="_on_AttackCool_timeout"]
+[connection signal="timeout" from="AttackInt" to="." method="_on_AttackInt_timeout"]
+[connection signal="timeout" from="ArrowTimer" to="." method="_on_ArrowTimer_timeout"]
+[connection signal="timeout" from="JumpTimer" to="." method="_on_JumpTimer_timeout"]
+[connection signal="pressed" from="Pause_Menu/Continue" to="Pause_Menu" method="_on_Continue_pressed"]
+[connection signal="pressed" from="Pause_Menu/Quit" to="Pause_Menu" method="_on_Quit_pressed"]

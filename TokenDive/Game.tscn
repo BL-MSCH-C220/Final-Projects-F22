@@ -1,0 +1,123 @@
+[gd_scene load_steps=27 format=2]
+
+[ext_resource path="res://Player/Player.gd" type="Script" id=1]
+[ext_resource path="res://House/House.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Enemy/Son.gd" type="Script" id=3]
+[ext_resource path="res://UI/InputRemapMenu.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Assets/315844__gneube__zombie-snarl.wav" type="AudioStream" id=5]
+[ext_resource path="res://Audio/Music_Main_Loop.ogg" type="AudioStream" id=6]
+[ext_resource path="res://FX_TGShot.gd" type="Script" id=7]
+[ext_resource path="res://Enemy/Enemy.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Enemy/Child.gd" type="Script" id=9]
+[ext_resource path="res://Player/Blaster.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Player/Blaster.gd" type="Script" id=11]
+[ext_resource path="res://Enemy/Mom.gd" type="Script" id=12]
+[ext_resource path="res://Enemy/Dad.tscn" type="PackedScene" id=21]
+[ext_resource path="res://Enemy/Mom.tscn" type="PackedScene" id=22]
+[ext_resource path="res://UI/HUD.tscn" type="PackedScene" id=23]
+[ext_resource path="res://Enemy/Child.tscn" type="PackedScene" id=24]
+[ext_resource path="res://Enemy/Son.tscn" type="PackedScene" id=25]
+[ext_resource path="res://Game.gd" type="Script" id=26]
+[ext_resource path="res://Audio/FS_Carpet_01.ogg" type="AudioStream" id=27]
+[ext_resource path="res://Audio/FS_Carpet_03.ogg" type="AudioStream" id=28]
+[ext_resource path="res://Audio/FS_Carpet_02.ogg" type="AudioStream" id=29]
+[ext_resource path="res://Audio/FX_Pickup.gd" type="Script" id=30]
+[ext_resource path="res://Audio/FX_Pickup.ogg" type="AudioStream" id=31]
+[ext_resource path="res://Audio/FX_TGShot.ogg" type="AudioStream" id=32]
+
+[sub_resource type="CapsuleShape" id=4]
+radius = 0.5
+height = 1.5
+
+[sub_resource type="BoxShape" id=5]
+extents = Vector3( 0.5, 0.1, 0.5 )
+
+[node name="Game" type="Spatial"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.132748, 0, -2.727 )
+script = ExtResource( 26 )
+
+[node name="Maze" parent="." instance=ExtResource( 2 )]
+
+[node name="Enemy" parent="." instance=ExtResource( 8 )]
+transform = Transform( 1.4, 0, 0, 0, 1.4, 0, 0, 0, 1.4, -12.027, 0.0199018, 17.9158 )
+
+[node name="Child" parent="." groups=["Enemy"] instance=ExtResource( 24 )]
+script = ExtResource( 9 )
+
+[node name="Dad" parent="." groups=["Enemy"] instance=ExtResource( 21 )]
+transform = Transform( -0.000670182, 0, -0.8, 0, 0.8, 0, 0.8, 0, -0.000670182, -33.5264, -0.0297339, 17.1685 )
+
+[node name="Son" parent="." groups=["Enemy"] instance=ExtResource( 25 )]
+script = ExtResource( 3 )
+
+[node name="Mom" parent="." groups=["Enemy"] instance=ExtResource( 22 )]
+transform = Transform( -0.0157592, 0, 0.999876, 0, 1, 0, -0.999876, 0, -0.0157592, 16.8909, 0, 2.7871 )
+script = ExtResource( 12 )
+
+[node name="Player" type="KinematicBody" parent="."]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 9.08902, 0, -21.7373 )
+script = ExtResource( 1 )
+
+[node name="Body" type="CollisionShape" parent="Player"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1.3, 0 )
+shape = SubResource( 4 )
+
+[node name="Feet" type="CollisionShape" parent="Player"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0 )
+shape = SubResource( 5 )
+
+[node name="Pivot" type="Spatial" parent="Player"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
+
+[node name="Camera" type="Camera" parent="Player/Pivot"]
+current = true
+fov = 100.4
+
+[node name="Blaster" parent="Player/Pivot" instance=ExtResource( 10 )]
+transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0.264, -0.256, -0.295 )
+script = ExtResource( 11 )
+
+[node name="Timer2" type="Timer" parent="Player/Pivot/Blaster"]
+wait_time = 0.109
+one_shot = true
+
+[node name="RayCast" type="RayCast" parent="Player/Pivot"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.667522 )
+enabled = true
+cast_to = Vector3( 0, 0, -30 )
+
+[node name="FS_Carpet_01" type="AudioStreamPlayer" parent="Player"]
+stream = ExtResource( 27 )
+
+[node name="FS_Carpet_02" type="AudioStreamPlayer" parent="Player"]
+stream = ExtResource( 29 )
+
+[node name="FS_Carpet_03" type="AudioStreamPlayer" parent="Player"]
+stream = ExtResource( 28 )
+
+[node name="FS_Timer" type="Timer" parent="Player"]
+one_shot = true
+
+[node name="Music_Main_Loop" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+
+[node name="Robot" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+
+[node name="FX_TGShot" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 32 )
+script = ExtResource( 7 )
+
+[node name="FX_Pickup" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 31 )
+pitch_scale = 0.75
+script = ExtResource( 30 )
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="HUD" parent="UI" instance=ExtResource( 23 )]
+
+[node name="Menu" parent="UI" instance=ExtResource( 4 )]
+visible = false
+
+[connection signal="timeout" from="Player/Pivot/Blaster/Timer2" to="Player/Pivot/Blaster" method="_on_Timer2_timeout"]
